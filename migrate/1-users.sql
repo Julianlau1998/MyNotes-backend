@@ -1,0 +1,6 @@
+-- CREATE TABLE users (
+--     Id uuid NOT NULL,
+--     Username VARCHAR(255),
+--     Passw VARCHAR(255),
+--     PRIMARY KEY(Id)
+-- );
