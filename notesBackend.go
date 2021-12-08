@@ -253,7 +253,7 @@ func main() {
 
 	e := echo.New()
 
-	//e.Use(CORSMiddlewareWrapper)
+	e.Use(CORSMiddlewareWrapper)
 
 	r := e.Group("/api")
 	r.Use(middleJWT)
