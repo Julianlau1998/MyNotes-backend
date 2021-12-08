@@ -207,10 +207,10 @@ func middleUser(next echo.HandlerFunc) echo.HandlerFunc {
 
 func CORSMiddlewareWrapper(next echo.HandlerFunc) echo.HandlerFunc {
 	return func(ctx echo.Context) error {
-		req := ctx.Request()
 		dynamicCORSConfig := middleware.CORSConfig{
-			AllowOrigins: []string{req.Header.Get("Origin")},
+			AllowOrigins: []string{"https://app-mynotes.com"},
 			AllowHeaders: []string{"*"},
+			AllowMethods: []string{http.MethodGet, http.MethodPut, http.MethodPost, http.MethodDelete, http.MethodOptions},
 		}
 		CORSMiddleware := middleware.CORSWithConfig(dynamicCORSConfig)
 		CORSHandler := CORSMiddleware(next)
