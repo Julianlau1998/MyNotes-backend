@@ -31,13 +31,13 @@ func (r *Repository) GetById(id string, userID string) (models.Folder, error) {
 }
 
 func (r *Repository) Post(folder *models.Folder) (*models.Folder, error) {
-	statement := `INSERT INTO folders (id, userid, title, color, folderType, createdDate) VALUES ($1, $2, $3, $4, $5, CURRENT_TIME)`
+	statement := `INSERT INTO folders (id, userid, title, color, folderType, createdDate) VALUES ($1, $2, $3, $4, $5, CURRENT_TIMESTAMP)`
 	_, err := r.dbClient.Exec(statement, folder.ID, folder.UserID, folder.Title, folder.Color, folder.Type)
 	return folder, err
 }
 
 func (r *Repository) Update(folder *models.Folder, ID string, userID string) (models.Folder, error) {
-	query := `UPDATE folders SET title = $1, color = $2, createdDate = Now() WHERE userid = $3 AND id = $4`
+	query := `UPDATE folders SET title = $1, color = $2, createdDate = CURRENT_TIMESTAMP WHERE userid = $3 AND id = $4`
 	_, err := r.dbClient.Exec(query, folder.Title, folder.Color, folder.ID)
 
 	return *folder, err
