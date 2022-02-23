@@ -56,19 +56,6 @@ func (s *Service) Post(folder *models.Folder, userID string) (*models.Folder, er
 	folder.ID = id.String()
 	folder.UserID = userID
 
-	switch folder.Color {
-	case "Red":
-		folder.Color = "#C0392B"
-	case "Green":
-		folder.Color = "#196F3D"
-	case "Yellow":
-		folder.Color = "#9A7D0A"
-	case "Blue":
-		folder.Color = "#1F618D"
-	case "Gray":
-		folder.Color = "#424949"
-	}
-
 	return s.folderRepository.Post(folder)
 }
 
