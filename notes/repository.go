@@ -38,13 +38,13 @@ func (r *Repository) GetNoteById(id string, userID string) (models.Note, error) 
 }
 
 func (r *Repository) Post(note *models.Note) (*models.Note, error) {
-	statement := `INSERT INTO notes (id, userid, folderid, title, note, createdDate) VALUES ($1, $2, $3, $4, $5, CURRENT_TIMESTAMP)`
+	statement := `INSERT INTO notes (id, userid, folderid, title, note, createdDate) VALUES ($1, $2, $3, $4, $5, CURRENT_TIME)`
 	_, err := r.dbClient.Exec(statement, note.ID, note.UserID, note.FolderID, note.Title, note.Note)
 	return note, err
 }
 
 func (r *Repository) updateNote(note *models.Note) (models.Note, error) {
-	query := `UPDATE notes SET note = $1, title = $2, createdDate = CURRENT_TIMESTAMP WHERE userid = $3 AND id = $4`
+	query := `UPDATE notes SET note = $1, title = $2, createdDate = Now() WHERE userid = $3 AND id = $4`
 	_, err := r.dbClient.Exec(query, note.Note, note.Title, note.UserID, note.ID)
 
 	return *note, err

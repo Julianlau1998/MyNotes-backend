@@ -36,13 +36,13 @@ func (r *Repository) GetByFolder(folderID string, userID string) ([]models.List,
 }
 
 func (r *Repository) PostList(list *models.List) (*models.List, error) {
-	statement := `INSERT INTO lists (id, userid, folderid, title, createdDate) VALUES ($1, $2, $3, $4, CURRENT_TIMESTAMP)`
+	statement := `INSERT INTO lists (id, userid, folderid, title, createdDate) VALUES ($1, $2, $3, $4, CURRENT_TIME)`
 	_, err := r.dbClient.Exec(statement, list.ID, list.UserID, list.FolderID, list.Title)
 	return list, err
 }
 
 func (r *Repository) updateList(list *models.List, ID string, userID string) (models.List, error) {
-	query := `UPDATE lists SET title = $1, createdDate = CURRENT_TIMESTAMP WHERE userid = $2 AND id = $3`
+	query := `UPDATE lists SET title = $1, createdDate = Now() WHERE userid = $2 AND id = $3`
 	_, err := r.dbClient.Exec(query, list.Title, userID, ID)
 
 	return *list, err

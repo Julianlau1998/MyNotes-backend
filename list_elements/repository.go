@@ -23,7 +23,7 @@ func (r *Repository) GetAllByList(userID string, listID string) ([]models.ListEl
 }
 
 func (r *Repository) Post(element models.ListElement) (models.ListElement, error) {
-	statement := `INSERT INTO list_elements (id, userid, listId, element, deleted, position, createdDate) VALUES ($1, $2, $3, $4, $5, $6, CURRENT_TIMESTAMP)`
+	statement := `INSERT INTO list_elements (id, userid, listId, element, deleted, position, createdDate) VALUES ($1, $2, $3, $4, $5, $6, CURRENT_TIME)`
 	_, err := r.dbClient.Exec(statement, element.ID, element.UserID, element.ListID, element.Element, element.Deleted, element.Position)
 	return element, err
 }
